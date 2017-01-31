@@ -2,6 +2,12 @@ class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_required
   layout "admin"
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    flash[:alert] = "Product deleted"
+    redirect_to admin_products_path
+  end
   def new
       @product = Product.new
   end
